@@ -109,7 +109,7 @@ class FirstScreen(tk.Tk):
 
             client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             try:
-                client_socket.connect(("localhost", 12345))
+                client_socket.connect(("0.tcp.in.ngrok.io", 17064))
                 status = client_socket.recv(1024).decode()
                 if status == 'not_allowed':
                     client_socket.close()
@@ -138,7 +138,7 @@ class FirstScreen(tk.Tk):
 
             client_socket.send(image_bytes)
 
-            clients_data_size_bytes = client_socket.recv(1024)
+            clients_data_size_bytes = client_socket.recv(1024*8)
             clients_data_size_int = struct.unpack('i', clients_data_size_bytes)[0]
             b = b''
             while True:
